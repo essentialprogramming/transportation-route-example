@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class RouteController {
@@ -24,7 +26,7 @@ public class RouteController {
         this.service = service;
     }
 
-    @GetMapping({"/", "/helloMessage"})
+    @GetMapping({"/helloMessage"})
     public String hello(Model model, HttpServletRequest request) {
         model.addAttribute("name", request.getParameter("name"));
         String path = request.getContextPath();
@@ -39,5 +41,13 @@ public class RouteController {
     @PostMapping("/city")
     public ResponseEntity<City> addCity(@RequestBody City city) {
         return new ResponseEntity<>(service.addCity(city), HttpStatus.OK);
+    }
+
+    @GetMapping({"/", "/routes"})
+    public ResponseEntity<List<City>> getCities(HttpSession session) {
+        if (!(session.getAttribute("username") == null)) {
+            List<City> cities = service.getAll();
+            return new ResponseEntity<>(cities, HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }
