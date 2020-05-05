@@ -45,7 +45,7 @@ public class RouteController {
 
     @GetMapping({"/", "/cities"})
     public String getCities(HttpSession session, Model model) {
-        if (session.getAttribute("username") != null) {
+        if (session.getAttribute("user") != null) {
             List<City> cities = service.getAll();
             model.addAttribute("cities", cities);
             return "home";
