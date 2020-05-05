@@ -3,6 +3,7 @@ package com.route.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Builder
@@ -19,4 +20,10 @@ public class CityEntity {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany
+    @JoinTable(name="city_neighbours",
+            joinColumns={@JoinColumn(name="city_id")},
+            inverseJoinColumns={@JoinColumn(name="neighbour_id")})
+    private List<CityEntity> neighbours;
 }

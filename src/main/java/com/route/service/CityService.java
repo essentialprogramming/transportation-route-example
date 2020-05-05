@@ -5,8 +5,10 @@ import com.route.mapper.CityMapper;
 import com.route.model.City;
 import com.route.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +26,8 @@ public class CityService {
     @Transactional
     public City addCity(City city) {
         CityEntity entity = CityMapper.cityToEntity(city);
+        List<CityEntity> neighbours = repository.findAllByNameIn(city.getNeighbours());
+        entity.setNeighbours(neighbours);
         repository.save(entity);
 
         return CityMapper.entityToCity(entity);
@@ -32,5 +36,11 @@ public class CityService {
     @Transactional
     public List<City> getAll() {
         return repository.findAll().stream().map(CityMapper::entityToCity).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public City findById(int id) {
+        CityEntity existingCity = repository.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "City not found."));
+        return CityMapper.entityToCity(existingCity);
     }
 }
