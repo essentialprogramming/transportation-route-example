@@ -11,7 +11,7 @@
    </head>
 
    <body>
-      <json:array name="rows" prettyPrint="true">
+      <json:array name="cities" prettyPrint="true">
           <c:forEach var="city" items="${cities}">
                       <json:object>
                             <c:out value="${city.id}" />
