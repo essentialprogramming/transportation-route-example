@@ -8,10 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,12 +43,13 @@ public class RouteController {
         return new ResponseEntity<>(service.addCity(city), HttpStatus.OK);
     }
 
-    @GetMapping({"/", "/routes"})
-    public ResponseEntity<List<City>> getCities(HttpSession session) {
+    @GetMapping({"/", "/cities"})
+    public String getCities(HttpSession session, Model model) {
         if (!(session.getAttribute("username") == null)) {
             List<City> cities = service.getAll();
-            return new ResponseEntity<>(cities, HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            model.addAttribute("cities", cities);
+            return "home";
+        } else return "error";
     }
 
     @GetMapping("/city/{id}")

@@ -9,14 +9,14 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    @PostMapping("/register")
-    public String register(HttpServletRequest request, HttpSession session) {
+    @PostMapping("/authenticate")
+    public String authenticate(HttpServletRequest request, HttpSession session) {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         if ((username.equals("admin") && password.equals("admin"))) {
             session.setAttribute("username", username);
-            return "home";
+            return "redirect:/cities";
         } else return "error";
     }
 

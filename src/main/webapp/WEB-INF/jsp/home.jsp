@@ -1,18 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<html>
+   <head>
+      <title>Home</title>
+      <style>
+        table,th,td {
+                border:1px solid black;
+                width:70%
+        }
+      </style>
+   </head>
 
-       <head>
-           <meta charset="UTF-8">
-           <title> Home </title>
-           <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-           <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-           <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
-       </head>
+   <body>
+      <json:array name="rows" prettyPrint="true">
+          <c:forEach var="city" items="${cities}">
+                      <json:object>
+                            <c:out value="${city.id}" />
+                            <c:out value="${city.name}" />
+                            <c:out value="<br>" escapeXml="false"></c:out>
 
-       <body>
-            <script type = "text/babel" src="/js/cities.js"></script>
-            <p>Welcome to home page</p>
-            <div id="root"></div>
+                            <json:property name="Id" value="${city.id}"/>
+                            <json:property name="Name" value="${city.name}"/>
+                      </json:object>
+                  </c:forEach>
+      </json:array>
 
-       </body>
+
+   </body>
 </html>

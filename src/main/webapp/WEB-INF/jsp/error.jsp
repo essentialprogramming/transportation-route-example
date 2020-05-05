@@ -3,7 +3,7 @@
 
        <head>
            <meta charset="UTF-8">
-           <title> Register </title>
+           <title> Authenticate </title>
        </head>
 
        <body>

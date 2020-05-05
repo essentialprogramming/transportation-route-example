@@ -9,7 +9,6 @@
 
        <body>
            <p> Hello </p>
-           <script src="/js/static.js"></script>
            <h2 class="hello-title">Hello ${name}!</h2>
        </body>
 
