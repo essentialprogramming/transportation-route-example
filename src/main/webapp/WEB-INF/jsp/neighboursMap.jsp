@@ -10,19 +10,19 @@
    </head>
 
    <body>
-      <json:array name="cities" prettyPrint="true">
+      <json:array name="neighbours" prettyPrint="true">
 
             <table>
                     <tbody>
                             <tr><th>ID</th><th>Name</th><th>Action</th></tr>
-                            <c:forEach items="${cities}" var="city">
+                            <c:forEach items="${neighbours}" var="item">
 
-                                   <tr><td><c:out value="${city.id}"></c:out></td>
-                                   <td><c:out value="${city.name}"></c:out></td>
+                                   <tr><td><c:out value="${item.id}"></c:out></td>
+                                   <td><c:out value="${item.name}"></c:out></td>
 
                                    <form action="/neighbours" method="get">
                                         <td><input type="submit" value="Add to route"</td>
-                                        <input type="hidden" name="cname" value="${city.name}"/>
+                                        <input type="hidden" name="cname" value="${item.name}"/>
                                    </form>
 
                             </c:forEach>
@@ -31,6 +31,8 @@
 
       </json:array>
 
+      <input type="button" onClick="window.location='http://localhost:8080/route';" value="Complete route" />
+      <input type="button" onClick="window.location='http://localhost:8080/undo';" value="Undo" />
 
    </body>
 </html>
