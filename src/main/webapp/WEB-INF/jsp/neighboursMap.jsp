@@ -31,8 +31,8 @@
 
       </json:array>
 
-      <input type="button" onClick="window.location='http://localhost:8080/route';" value="Complete route" />
-      <input type="button" onClick="window.location='http://localhost:8080/undo';" value="Undo" />
+      <input type="button" onClick="window.location='/route';" value="Complete route" />
+      <input type="button" onClick="window.location='/undo';" value="Undo" />
 
    </body>
 </html>

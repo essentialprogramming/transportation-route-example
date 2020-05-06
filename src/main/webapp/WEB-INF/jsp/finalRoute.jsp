@@ -25,7 +25,7 @@
       </json:array>
 
       <br>
-      <input type="button" onClick="window.location='http://localhost:8080/cities';" value="Create new route" />
+      <input type="button" onClick="window.location='/cities';" value="Create new route" />
 
    </body>
 </html>

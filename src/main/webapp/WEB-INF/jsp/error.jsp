@@ -9,7 +9,7 @@
        <body>
 
             <p>Login failed. Please try again.</p>
-            <input type="button" onClick="window.location='http://localhost:8080/login';" value="click here" />
+            <input type="button" onClick="window.location='/login';" value="click here" />
 
        </body>
 </html>
