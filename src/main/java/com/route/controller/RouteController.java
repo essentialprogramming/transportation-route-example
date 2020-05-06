@@ -28,18 +28,6 @@ public class RouteController {
         this.service = service;
     }
 
-    @GetMapping({"/helloMessage"})
-    public String hello(Model model, HttpServletRequest request) {
-        model.addAttribute("name", request.getParameter("name"));
-        String path = request.getContextPath();
-        return "hello";
-    }
-
-    @GetMapping(value = "/hello")
-    public String promise() {
-        return "test";
-    }
-
     @PostMapping("/city")
     public ResponseEntity<City> addCity(@RequestBody City city) {
         return new ResponseEntity<>(service.addCity(city), HttpStatus.OK);

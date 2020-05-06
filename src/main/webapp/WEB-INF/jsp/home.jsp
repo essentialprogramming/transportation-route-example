@@ -2,16 +2,11 @@
 <html>
    <head>
       <title>Home</title>
-      <style>
-        table,th,td {
-                border:1px solid black;
-        }
-      </style>
+      <link rel="stylesheet" type="text/css" href="/css/style.css">
    </head>
 
    <body>
-      <json:array name="cities" prettyPrint="true">
-
+            <script src="/js/static.js"></script>
             <table>
                     <tbody>
                             <tr><th>ID</th><th>Name</th><th>Action</th></tr>
@@ -21,7 +16,7 @@
                                    <td><c:out value="${city.name}"></c:out></td>
 
                                    <form action="/neighbours" method="get">
-                                        <td><input type="submit" value="Add to route"</td>
+                                        <td><input type="submit" value="Start"</td>
                                         <input type="hidden" name="cname" value="${city.name}"/>
                                    </form>
 
@@ -29,8 +24,6 @@
                     </tbody>
             </table>
 
-      </json:array>
-
-
    </body>
+
 </html>

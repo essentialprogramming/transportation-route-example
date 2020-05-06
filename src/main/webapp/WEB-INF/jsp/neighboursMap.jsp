@@ -2,11 +2,7 @@
 <html>
    <head>
       <title>Home</title>
-      <style>
-        table,th,td {
-                border:1px solid black;
-        }
-      </style>
+      <link rel="stylesheet" type="text/css" href="/css/style.css">
    </head>
 
    <body>
