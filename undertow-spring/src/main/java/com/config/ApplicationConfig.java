@@ -1,7 +1,7 @@
 package com.config;
 
 
-import com.api.resources.JaxRSController;
+import com.controller.RouteController;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
@@ -16,11 +16,11 @@ import javax.ws.rs.ApplicationPath;
 public class ApplicationConfig extends ResourceConfig {
 
 	public ApplicationConfig() {
-		register(JaxRSController.class);
 		register(JacksonJaxbJsonProvider.class);
 
 		register(OpenApiResource.class);
 		register(AcceptHeaderOpenApiResource.class);
+		register(RouteController.class);
 	}
 
 }
