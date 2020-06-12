@@ -44,6 +44,7 @@ public class CitiesServlet extends HttpServlet {
             context.getRequestDispatcher("/auth/account/home.jsp").forward(request, response);
 
         } else
-            context.getRequestDispatcher("/auth/account/login.jsp").forward(request, response);
+            response.sendRedirect("/login?redirect_uri=localhost:8080/cities");
+//            context.getRequestDispatcher("/auth/account/login.jsp").forward(request, response);
     }
 }
