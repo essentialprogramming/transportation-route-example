@@ -1,8 +1,7 @@
 package com.config;
 
 
-import com.controller.AuthenticationController;
-import com.controller.RouteController;
+import com.controller.*;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
@@ -23,6 +22,8 @@ public class ApplicationConfig extends ResourceConfig {
 		register(AcceptHeaderOpenApiResource.class);
 		register(RouteController.class);
 		register(AuthenticationController.class);
+		register(CitiesController.class);
+		register(NeighboursController.class);
 	}
 
 }

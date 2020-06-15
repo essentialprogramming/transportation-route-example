@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neighbours</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="/static/header.js"></script>
+</head>
+<body>
+
+<p id='output'></p>
+
+<script>
+
+     function get(name){
+                  alert("function:"+ name)
+                      if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+                      return decodeURIComponent(name[1]);
+                  }
+
+
+docReady(function () {
+
+let name = get("cname");
+alert(name)
+ alert("The URL of this page is: " + window.location.href);
+let url = 'http://localhost:8080/api/neighbours?cname=' + name
+var items;
+
+                  console.log(url)
+
+                  fetch(url)
+                         .then(res => res.json())
+                         .then(json => {
+                               items = json
+                               document.getElementById("output").innerHTML = json2Table(items);
+
+                         })
+                         .catch(function(error) {
+                                console.log(error);
+                         });
+
+
+});
+
+function json2Table(json) {
+
+  let headerRow = `<tr><th>ID</th><th>Name</th><th>Action</th></tr>`
+
+  let rows = json
+    .map(city => {
+      return `
+              <tr>
+
+                <td>${city.id}</td>
+                <td>${city.name}</td>
+                <td>
+                <form action="/neighbours" method="get">
+                   <input type="submit" value="Add to route">
+                   <input type="hidden" name="cname" value="${city.name}"/>
+                </form>
+                </td>
+
+              </tr>
+              `
+    });
+
+  const table = `
+	<table>
+		<thead>
+			<tr>${headerRow}</tr>
+		<thead>
+		<tbody>
+			${rows.join('')}
+		<tbody>
+	<table>`;
+
+  return table;
+}
+
+
+
+
+
+
+            </script>
+
+<input type="button" onClick="window.location='/route';" value="Complete route" />
+<input type="button" onClick="window.location='/undo';" value="Undo" />
+
+</body>
+</html>

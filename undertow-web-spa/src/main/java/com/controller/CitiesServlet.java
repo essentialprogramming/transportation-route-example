@@ -41,10 +41,10 @@ public class CitiesServlet extends HttpServlet {
             List<City> cities = service.getAll();
 
             request.setAttribute("cities", cities);
-            context.getRequestDispatcher("/auth/account/home.jsp").forward(request, response);
+            context.getRequestDispatcher("/static/home.html").forward(request, response);
 
         } else
-            response.sendRedirect("/login?redirect_uri=localhost:8080/cities");
+            response.sendRedirect("/login?redirect_uri=http://localhost:8080/cities");
 //            context.getRequestDispatcher("/auth/account/login.jsp").forward(request, response);
     }
 }

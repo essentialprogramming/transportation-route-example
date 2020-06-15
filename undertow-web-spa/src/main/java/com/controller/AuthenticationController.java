@@ -4,11 +4,12 @@ import com.model.User;
 import com.service.AuthenticationService;
 import com.web.json.JsonResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("/")
@@ -16,6 +17,9 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationService service;
+
+    @Context
+    private HttpServletRequest httpRequest;
 
     @POST
     @Path("authenticate")
@@ -30,17 +34,13 @@ public class AuthenticationController {
 
         if (user != null) {
             final String url = redirectUri;
+            httpRequest.getSession().setAttribute("user",user);
             return new JsonResponse()
                     .with("status", "Redirect")
                     .with("redirectUrl", url).done();
-//            request.getSession().setAttribute("user", user);
-//            response.sendRedirect("/cities");
         } else
             return new JsonResponse()
                     .with("status", "Error")
                     .with("error", "The username or password you entered is incorrect.").done();
-//            context.getRequestDispatcher("/auth/account/error.jsp").forward(request, response);
-
-
     }
 }

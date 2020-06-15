@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<p id='output'></p>
+
+<script>
+
+function json2Table(json) {
+
+  let headerRow = `<tr><th>ID</th><th>Name</th><th>Action</th></tr>`
+
+  let rows = json
+    .map(city => {
+      return `
+              <tr>
+
+                <td>${city.id}</td>
+                <td>${city.name}</td>
+                <td>
+                <form action="/neighbours" method="get">
+                   <input type="submit" value="Start">
+                   <input type="hidden" name="cname" value="${city.name}"/>
+                </form>
+                </td>
+
+              </tr>
+              `
+    });
+
+  const table = `
+	<table>
+		<thead>
+			<tr>${headerRow}</tr>
+		<thead>
+		<tbody>
+			${rows.join('')}
+		<tbody>
+	<table>`;
+
+  return table;
+}
+
+                  var items;
+                  fetch('http://localhost:8080/api/cities')
+                         .then(res => res.json())
+                         .then(json => {
+                                items = json
+                                document.getElementById("output").innerHTML = json2Table(items);
+
+                         })
+                         .catch(function(error) {
+                                console.log(error);
+                         });
+
+
+</script>
+
+</body>
+</html>

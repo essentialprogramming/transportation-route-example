@@ -36,10 +36,12 @@ public class UndoServlet extends HttpServlet {
         List<City> route = (List<City>) request.getSession().getAttribute("route");
         route.remove(route.size() - 1);
 
+        String cityName = route.get(route.size() - 1).getName();
+
         List<City> neighbours = service.getNeighbours(route.get(route.size() - 1).getName());
         request.setAttribute("neighbours", neighbours);
 
-        context.getRequestDispatcher("/auth/account/neighboursMap.jsp").forward(request, response);
+        response.sendRedirect("/neighbours?cname=" + cityName);
     }
 
 }

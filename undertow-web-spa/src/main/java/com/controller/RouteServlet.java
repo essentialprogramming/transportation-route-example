@@ -36,7 +36,7 @@ public class RouteServlet extends HttpServlet {
         List<City> route = (List<City>) request.getSession().getAttribute("route");
         request.getSession().setAttribute("route", route);
 
-        context.getRequestDispatcher("/auth/account/finalRoute.jsp").forward(request, response);
+        context.getRequestDispatcher("/static/finalRoute.html").forward(request, response);
 
     }
 }

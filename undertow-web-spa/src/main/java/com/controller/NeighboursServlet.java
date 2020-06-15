@@ -41,10 +41,7 @@ public class NeighboursServlet extends HttpServlet {
         route.add(city);
         request.getSession().setAttribute("route", route);
 
-        List<City> neighbours = service.getNeighbours(cityName);
-
-        request.setAttribute("neighbours", neighbours);
-        context.getRequestDispatcher("/auth/account/neighboursMap.jsp").forward(request, response);
+        context.getRequestDispatcher("/static/neighbours.html?cname= " + cityName).forward(request, response);
 
     }
 
