@@ -96,9 +96,6 @@ public final class UndertowServer {
                                 .setLoadOnStartup(1),
                         servlet("routeServlet", RouteServlet.class)
                                 .addMapping("/route/*")
-                                .setLoadOnStartup(1),
-                        servlet("undoServlet", UndoServlet.class)
-                                .addMapping("/undo/*")
                                 .setLoadOnStartup(1))
                 .addServlet(JspServletBuilder.createServlet("jspServlet", "*.jsp"));
 

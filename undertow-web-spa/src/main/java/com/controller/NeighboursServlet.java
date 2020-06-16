@@ -36,13 +36,6 @@ public class NeighboursServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String cityName = request.getParameter("cname");
-        City city = service.findByName(cityName);
-
-        List<City> route =  SessionUtils.getAttribute(request, "route");
-        route.add(city);
-        route.forEach(item -> System.out.println( item.getName()));
-
-        SessionUtils.setAttribute(request,"route", route);
 
         context.getRequestDispatcher("/static/neighbours.html?cname= " + cityName).forward(request, response);
 

@@ -39,14 +39,32 @@ docReady(async function () {
 
 });
 
-function test(){
-alert("TEST")
-}
-
 
 async function addToRoute(cityName){
+let url = '/api/neighbours?cname=' + cityName;
+let addUrl = 'api/neighbours?cname=' + cityName;
 
-alert("City name")
+    let response = await fetch(url)
+        .then(res => res.json())
+        .then(json => {
+            return json;
+
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+
+    let addResult = await fetch(addUrl,{method: 'POST'} )
+        .then(res => res.json())
+        .then(json => {
+            return json;
+
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+
+    document.getElementById("output").innerHTML = json2Table(response);
 }
 
 
@@ -66,7 +84,8 @@ function json2Table(json) {
                 <td>${city.id}</td>
                 <td>${city.name}</td>
                 <td>
-                   <button onclick='addToRoute(${city.name})'>Add to route</button>
+                   <button onclick="addToRoute('${city.name}')">Add to route</button>
+
                 </td>
 
               </tr>
@@ -86,11 +105,27 @@ function json2Table(json) {
   return table;
 }
 
+async function undo(){
+
+let url = 'api/neighbours';
+
+    let result = await fetch(url,{method: 'DELETE'})
+        .then(res => res.json())
+        .then(json => {
+            return json;
+
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+ window.location=`/neighbours?cname=${result.response.cname}`;
+}
+
 
 </script>
 
 <input type="button" onclick="window.location='/route';" value="Complete route" />
-<input type="button" onclick="window.location='/undo';" value="Undo" />
+<input type="button" onclick="undo()" value="Undo" />
 
 </body>
 </html>

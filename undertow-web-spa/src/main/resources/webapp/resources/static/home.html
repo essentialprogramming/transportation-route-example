@@ -48,10 +48,7 @@
                 <td>${city.id}</td>
                 <td>${city.name}</td>
                 <td>
-                <form action="/neighbours" method="get">
-                   <input type="submit" value="Start">
-                   <input type="hidden" name="cname" value="${city.name}"/>
-                </form>
+                   <button onclick="addToRoute('${city.name}')">Start</button>
                 </td>
 
               </tr>
@@ -72,6 +69,22 @@
         return table;
     }
 
+async function addToRoute(cityName){
+
+let addUrl = 'api/neighbours?cname=' + cityName;
+
+    let addResult = await fetch(addUrl,{method: 'POST'} )
+        .then(res => res.json())
+        .then(json => {
+            return json;
+
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+
+    window.location=`/neighbours?cname=${addResult.response.cname}`;
+}
 
 </script>
 
