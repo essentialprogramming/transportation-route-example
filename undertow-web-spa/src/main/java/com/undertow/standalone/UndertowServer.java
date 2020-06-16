@@ -88,9 +88,6 @@ public final class UndertowServer {
                         servlet("loginServlet", LoginServlet.class)
                                 .addMapping("/login/*")
                                 .setLoadOnStartup(1),
-                        servlet("authenticationServlet", AuthenticationServlet.class)
-                                .addMapping("/authenticate/*")
-                                .setLoadOnStartup(1),
                         servlet("citiesServlet", CitiesServlet.class)
                                 .addMapping("/cities/*")
                                 .setLoadOnStartup(1),

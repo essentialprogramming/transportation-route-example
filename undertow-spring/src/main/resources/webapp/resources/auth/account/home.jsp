@@ -14,10 +14,13 @@
                                    <tr><td><c:out value="${city.id}"></c:out></td>
                                    <td><c:out value="${city.name}"></c:out></td>
 
+                                   <td>
                                    <form action="/neighbours" method="get">
-                                        <td><input type="submit" value="Start"</td>
+                                        <input type="submit" value="Start">
                                         <input type="hidden" name="cname" value="${city.name}"/>
                                    </form>
+                                   </td>
+                            </tr>
 
                             </c:forEach>
                     </tbody>

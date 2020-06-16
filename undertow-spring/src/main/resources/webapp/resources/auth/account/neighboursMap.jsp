@@ -16,10 +16,13 @@
                                    <tr><td><c:out value="${item.id}"></c:out></td>
                                    <td><c:out value="${item.name}"></c:out></td>
 
+                                   <td>
                                    <form action="/neighbours" method="get">
-                                        <td><input type="submit" value="Add to route"</td>
+                                        <input type="submit" value="Add to route">
                                         <input type="hidden" name="cname" value="${item.name}"/>
                                    </form>
+                                   </td>
+                            </tr>
 
                             </c:forEach>
                     </tbody>
