@@ -50,12 +50,12 @@
         let contactData = JSON.stringify(data);
         let redirectUri = Utils.getRequestParameter("redirect_uri");
         let loginPromise = new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/authenticate?redirect_uri=' + redirectUri);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onload = (response) => resolve(response.currentTarget.responseText);
-        xhr.onerror = () => reject(xhr.statusText);
-        xhr.send(contactData);
+              const xhr = new XMLHttpRequest();
+              xhr.open('POST', '/api/authenticate?redirect_uri=' + redirectUri);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.onload = (response) => resolve(response.currentTarget.responseText);
+              xhr.onerror = () => reject(xhr.statusText);
+              xhr.send(contactData);
     });
 
         loginPromise
