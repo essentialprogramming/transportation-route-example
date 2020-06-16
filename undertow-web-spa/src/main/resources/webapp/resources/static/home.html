@@ -19,7 +19,6 @@
 
     docReady(async function () {
 
-
         let items = await fetch('/api/cities')
             .then(res => res.json())
             .then(json => {
@@ -30,6 +29,18 @@
             });
 
         document.getElementById("output").innerHTML = json2Table(items);
+
+
+        let initUrl = '/api/neighbours/init';
+        let result = await fetch(initUrl,{method: 'GET'} )
+            .then(res => res.json())
+            .then(json => {
+                return json;
+
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
     });
 
     function json2Table(json) {
@@ -73,7 +84,7 @@ async function addToRoute(cityName){
 
 let addUrl = 'api/neighbours?cname=' + cityName;
 
-    let addResult = await fetch(addUrl,{method: 'POST'} )
+    let result = await fetch(addUrl,{method: 'POST'} )
         .then(res => res.json())
         .then(json => {
             return json;
@@ -83,7 +94,7 @@ let addUrl = 'api/neighbours?cname=' + cityName;
             console.log(error);
         });
 
-    window.location=`/neighbours?cname=${addResult.response.cname}`;
+    window.location=`/neighbours?cname=${result.response.cname}`;
 }
 
 </script>

@@ -6,8 +6,10 @@
     <title> Login </title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="/js/header.js"></script>
+    <script src="/js/utils.js"></script>
     <link rel="stylesheet" type="text/css" href="/auth/account/style.css">
 </head>
 
@@ -28,16 +30,10 @@
         <span id="error"/>
     </form>
 
-
 </div>
 
 
 <script>
-    function get(name){
-        if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
-            return decodeURIComponent(name[1]);
-    }
-
 
     function login(event) {
 
@@ -52,7 +48,7 @@
 
         console.log(data);
         let contactData = JSON.stringify(data);
-        let redirectUri = get("redirect_uri");
+        let redirectUri = Utils.getRequestParameter("redirect_uri");
         let loginPromise = new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
         xhr.open('POST', '/api/authenticate?redirect_uri=' + redirectUri);

@@ -13,6 +13,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/")
@@ -29,6 +30,18 @@ public class NeighboursController {
     @Produces(MediaType.APPLICATION_JSON)
     public List<City> getCities(@QueryParam("cname") String cname) {
         return service.getNeighbours(cname);
+    }
+
+    @GET
+    @Path("/neighbours/init")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonResponse initRoute() {
+        List<City> route = new ArrayList<>();
+        SessionUtils.setAttribute(request,"route", route);
+
+        return new JsonResponse()
+                .with("status", "Ok")
+                .done();
     }
 
     @POST
