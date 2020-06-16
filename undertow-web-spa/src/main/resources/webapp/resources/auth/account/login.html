@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <title> Login </title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="/js/header.js"></script>
     <script src="/js/utils.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/auth/account/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -60,12 +60,12 @@
 
         loginPromise
             .then(responseText => {
-            let json = JSON.parse(responseText);
-        if (json.response.status !== "Error"){
-            window.location.replace(json.response.redirectUrl);
-        } else{
-            document.getElementById("error").innerHTML = json.response.error;
-        }
+               let json = JSON.parse(responseText);
+               if (json.response.status !== "Error"){
+                 window.location.replace(json.response.redirectUrl);
+             } else{
+                 document.getElementById("error").innerHTML = json.response.error;
+             }
     })
     .catch(function(error) {
             console.log(error);
