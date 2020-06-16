@@ -39,6 +39,17 @@ docReady(async function () {
 
 });
 
+function test(){
+alert("TEST")
+}
+
+
+async function addToRoute(cityName){
+
+alert("City name")
+}
+
+
 function json2Table(json) {
 
   let headerRow = `<tr>
@@ -55,10 +66,7 @@ function json2Table(json) {
                 <td>${city.id}</td>
                 <td>${city.name}</td>
                 <td>
-                <form action="/neighbours" method="get">
-                   <input type="submit" value="Add to route">
-                   <input type="hidden" name="cname" value="${city.name}"/>
-                </form>
+                   <button onclick='addToRoute(${city.name})'>Add to route</button>
                 </td>
 
               </tr>
