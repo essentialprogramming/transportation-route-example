@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.User;
 import com.service.AuthenticationService;
+import com.util.web.SessionUtils;
 import com.web.json.JsonResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class AuthenticationController {
 
         if (user != null) {
             final String url = redirectUri;
-            httpRequest.getSession().setAttribute("user",user);
+            SessionUtils.setAttribute(httpRequest,"user", user);
             return new JsonResponse()
                     .with("status", "Redirect")
                     .with("redirectUrl", url).done();

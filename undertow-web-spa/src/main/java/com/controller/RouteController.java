@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.City;
 import com.service.CityService;
+import com.util.web.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class RouteController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/route")
     public List<City> finalRoute(){
-        return (List<City>) httpRequest.getSession().getAttribute("route");
+        return SessionUtils.getAttribute(httpRequest, "route");
     }
 
 }

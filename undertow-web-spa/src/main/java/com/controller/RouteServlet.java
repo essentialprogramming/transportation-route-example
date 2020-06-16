@@ -33,9 +33,6 @@ public class RouteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<City> route = (List<City>) request.getSession().getAttribute("route");
-        request.getSession().setAttribute("route", route);
-
         context.getRequestDispatcher("/static/finalRoute.html").forward(request, response);
 
     }

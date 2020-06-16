@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.City;
 import com.service.CityService;
+import com.util.web.SessionUtils;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.inject.Inject;
@@ -37,9 +38,11 @@ public class NeighboursServlet extends HttpServlet {
         String cityName = request.getParameter("cname");
         City city = service.findByName(cityName);
 
-        List<City> route = (List<City>) request.getSession().getAttribute("route");
+        List<City> route =  SessionUtils.getAttribute(request, "route");
         route.add(city);
-        request.getSession().setAttribute("route", route);
+        route.forEach(item -> System.out.println( item.getName()));
+
+        SessionUtils.setAttribute(request,"route", route);
 
         context.getRequestDispatcher("/static/neighbours.html?cname= " + cityName).forward(request, response);
 

@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Final Route</title>
+
+    <meta http-equiv="Cache-Control" content="no-store" />
+
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -13,16 +16,16 @@
 
 <script>
 
-     var ul = document.getElementById("list");
+     let ul = document.getElementById("list");
      document.getElementById("route").appendChild(ul);
 
-     var items;
-     fetch('http://localhost:8080/api/city/route')
+     let items;
+     fetch('/api/city/route')
                          .then(res => res.json())
                          .then(json => {
                                 items = json
                                 items.forEach(function(city){
-                                    var li = document.createElement('li')
+                                    let li = document.createElement('li')
                                     ul.appendChild(li)
                                     li.innerHTML += city.name
                             })
@@ -33,7 +36,7 @@
 
 </script>
 
-<input type="button" onClick="window.location='/cities';" value="Create new route" />
+<input type="button" onclick="window.location='/cities';" value="Create new route" />
 
 </body>
 </html>

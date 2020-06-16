@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.User;
 import com.service.AuthenticationService;
+import com.util.web.SessionUtils;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.inject.Inject;
@@ -38,7 +39,7 @@ public class AuthenticationServlet extends HttpServlet {
         User user = service.authenticate(username, password);
 
         if (user != null) {
-            request.getSession().setAttribute("user", user);
+            SessionUtils.setAttribute(request,"user", user);
             response.sendRedirect("/cities");
         } else
             context.getRequestDispatcher("/auth/account/error.jsp").forward(request, response);

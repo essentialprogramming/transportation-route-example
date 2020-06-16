@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.City;
 import com.service.CityService;
+import com.util.web.SessionUtils;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.inject.Inject;
@@ -33,7 +34,7 @@ public class UndoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<City> route = (List<City>) request.getSession().getAttribute("route");
+        List<City> route = SessionUtils.getAttribute(request,"route");
         route.remove(route.size() - 1);
 
         String cityName = route.get(route.size() - 1).getName();

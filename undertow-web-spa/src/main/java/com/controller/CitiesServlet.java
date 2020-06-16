@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.City;
 import com.service.CityService;
+import com.util.web.SessionUtils;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.inject.Inject;
@@ -36,11 +37,13 @@ public class CitiesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<City> route = new ArrayList<>();
-        request.getSession().setAttribute("route", route);
-        if (request.getSession().getAttribute("user") != null) {
-            List<City> cities = service.getAll();
+        SessionUtils.setAttribute(request,"route", route);
+        if (SessionUtils.getAttribute(request,"user") != null) {
 
-            request.setAttribute("cities", cities);
+            //TODO  This was used to fetch all cities and use further in home.jsp. Now cities are fetched in home.html
+            //List<City> cities = service.getAll();
+            //request.setAttribute("cities", cities);
+
             context.getRequestDispatcher("/static/home.html").forward(request, response);
 
         } else

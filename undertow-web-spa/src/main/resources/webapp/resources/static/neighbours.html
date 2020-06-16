@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Neighbours</title>
+
+    <meta http-equiv="Cache-Control" content=" no-store" />
+
+    <meta charset="UTF-8">
+
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="/static/header.js"></script>
+
+    <script src="/js/header.js"></script>
+    <script src="/js/utils.js"></script>
 </head>
 <body>
 
-<p id='output'></p>
+<div id='output'></div>
+
 
 <script>
 
-     function get(name){
-                  alert("function:"+ name)
-                      if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
-                      return decodeURIComponent(name[1]);
-                  }
 
+docReady(async function () {
 
-docReady(function () {
+    let name = Utils.getRequestParameter("cname");
+    let url = '/api/neighbours?cname=' + name;
+    let response = await fetch(url)
+        .then(res => res.json())
+        .then(json => {
+            return json;
 
-let name = get("cname");
-alert(name)
- alert("The URL of this page is: " + window.location.href);
-let url = 'http://localhost:8080/api/neighbours?cname=' + name
-var items;
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
 
-                  console.log(url)
-
-                  fetch(url)
-                         .then(res => res.json())
-                         .then(json => {
-                               items = json
-                               document.getElementById("output").innerHTML = json2Table(items);
-
-                         })
-                         .catch(function(error) {
-                                console.log(error);
-                         });
+    document.getElementById("output").innerHTML = json2Table(response);
 
 
 });
 
 function json2Table(json) {
 
-  let headerRow = `<tr><th>ID</th><th>Name</th><th>Action</th></tr>`
+  let headerRow = `<tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Action</th>
+                    </tr>`
 
   let rows = json
     .map(city => {
@@ -79,14 +79,10 @@ function json2Table(json) {
 }
 
 
+</script>
 
-
-
-
-            </script>
-
-<input type="button" onClick="window.location='/route';" value="Complete route" />
-<input type="button" onClick="window.location='/undo';" value="Undo" />
+<input type="button" onclick="window.location='/route';" value="Complete route" />
+<input type="button" onclick="window.location='/undo';" value="Undo" />
 
 </body>
 </html>

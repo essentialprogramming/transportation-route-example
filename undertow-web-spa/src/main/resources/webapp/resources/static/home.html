@@ -1,23 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Home</title>
+
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta charset="UTF-8">
+
+    <script src="/js/header.js"></script>
+    <script src="/js/utils.js"></script>
+
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-<p id='output'></p>
+<div id='output'></div>
 
 <script>
 
-function json2Table(json) {
+    docReady(async function () {
 
-  let headerRow = `<tr><th>ID</th><th>Name</th><th>Action</th></tr>`
 
-  let rows = json
-    .map(city => {
-      return `
+        let items = await fetch('/api/cities')
+            .then(res => res.json())
+            .then(json => {
+                return json;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+        document.getElementById("output").innerHTML = json2Table(items);
+    });
+
+    function json2Table(json) {
+
+        let headerRow = `<tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Action</th>
+                     </tr>`
+
+        let rows = json
+            .map(city => {
+                return `
               <tr>
 
                 <td>${city.id}</td>
@@ -31,32 +56,21 @@ function json2Table(json) {
 
               </tr>
               `
-    });
+            });
 
-  const table = `
-	<table>
-		<thead>
-			<tr>${headerRow}</tr>
-		<thead>
-		<tbody>
-			${rows.join('')}
-		<tbody>
-	<table>`;
+        const table = `
+        	<table>
+		      <thead>
+		    	<tr>${headerRow}</tr>
+		      <thead>
+		      <tbody>
+		    	${rows.join('')}
+		      <tbody>
+	        <table>
+        `;
 
-  return table;
-}
-
-                  var items;
-                  fetch('http://localhost:8080/api/cities')
-                         .then(res => res.json())
-                         .then(json => {
-                                items = json
-                                document.getElementById("output").innerHTML = json2Table(items);
-
-                         })
-                         .catch(function(error) {
-                                console.log(error);
-                         });
+        return table;
+    }
 
 
 </script>
