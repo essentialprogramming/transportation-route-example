@@ -82,8 +82,7 @@
 
 async function addToRoute(cityName){
 
-let addUrl = 'api/neighbours?cname=' + cityName;
-
+    let addUrl = 'api/neighbours?cname=' + cityName;
     let result = await fetch(addUrl,{method: 'POST'} )
         .then(res => res.json())
         .then(json => {
